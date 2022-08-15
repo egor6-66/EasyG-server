@@ -1,6 +1,5 @@
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { User } from '../users/users.model';
 
 export default (models) => {
   return SequelizeModule.forRoot({

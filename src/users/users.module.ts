@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UserRoles } from '../intermediate-tables/user-roles.model';
 import { User } from './users.model';
 import { Role } from '../roles/roles.model';
+import { Token } from '../auth/auth.model';
 
 import { RolesModule } from '../roles/roles.module';
 import { AuthModule } from '../auth/auth.module';
@@ -20,6 +21,7 @@ import { UsersService } from './users.service';
     User,
     Role,
     UserRoles,
+    Token,
   ]),
     forwardRef(() => AuthModule),
     RolesModule,

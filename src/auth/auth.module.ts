@@ -1,5 +1,8 @@
 import { Module, forwardRef } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
+import { SequelizeModule } from '@nestjs/sequelize';
+
+import { User } from '../users/users.model';
+import { Token } from './auth.model';
 
 import { UsersModule } from '../users/users.module';
 
@@ -12,17 +15,14 @@ import { AuthService } from './auth.service';
   controllers: [AuthController],
   providers: [AuthService],
   imports: [
+    SequelizeModule.forFeature([
+      Token,
+      User,
+    ]),
     forwardRef(() => UsersModule),
-    JwtModule.register({
-      secret: process.env.JWT_KEY,
-      signOptions: {
-        expiresIn: '24h',
-      },
-    }),
   ],
   exports: [
     AuthService,
-    JwtModule,
   ],
 })
 export class AuthModule {

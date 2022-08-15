@@ -7,6 +7,7 @@ import { AddRoleDto } from './dto/add-role.dto';
 import { User } from './users.model';
 
 import { RolesService } from '../roles/roles.service';
+import { Role } from '../roles/roles.model';
 
 
 @Injectable()
@@ -18,7 +19,7 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     const user = await this.userDb.create(dto);
-    const role = await this.roleService.getRoleByValue('ADMIN');
+    const role = await this.roleService.getRoleByValue('USER');
     await user.$set('roles', [role.id]);
     user.roles = [role];
     return user;
@@ -29,7 +30,7 @@ export class UsersService {
   }
 
   async getUserByEmail(email: string) {
-    return await this.userDb.findOne({ where: { email }, include: { all: true } });
+    return await this.userDb.findOne({ where: { email }, include: {all: true} });
   }
 
   async addRole(dto: AddRoleDto) {

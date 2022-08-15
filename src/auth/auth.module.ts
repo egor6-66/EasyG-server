@@ -2,9 +2,9 @@ import { Module, forwardRef } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
 import { User } from '../users/users.model';
-import { Token } from './auth.model';
 
 import { UsersModule } from '../users/users.module';
+import { TokensModule } from '../tokens/tokens.module';
 
 import { AuthController } from './auth.controller';
 
@@ -16,9 +16,9 @@ import { AuthService } from './auth.service';
   providers: [AuthService],
   imports: [
     SequelizeModule.forFeature([
-      Token,
       User,
     ]),
+    TokensModule,
     forwardRef(() => UsersModule),
   ],
   exports: [

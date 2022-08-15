@@ -1,8 +1,8 @@
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 
 import { UserRoles } from '../intermediate-tables/user-roles.model';
 import { Role } from '../roles/roles.model';
-import { Token } from '../auth/auth.model';
+import { Token } from '../tokens/tokens.model';
 
 
 interface UserCreationAttrs {

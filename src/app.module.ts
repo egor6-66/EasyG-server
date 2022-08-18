@@ -1,9 +1,16 @@
-import { Module } from "@nestjs/common";
+import { ClassSerializerInterceptor, Module, UseInterceptors } from '@nestjs/common';
 
-import envConfig from './configs/env'
-import postgresConfig from './configs/postgres'
+import envConfig from './configs/env.config';
+import postgresConfig from './configs/postgres.config';
 
-import { UsersModule } from "./users/users.module";
+import { UserRoles } from './intermediate-tables/user-roles.model';
+import { User } from './users/users.model';
+import { Role } from './roles/roles.model';
+import { Token } from './tokens/tokens.model';
+
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -11,10 +18,15 @@ import { UsersModule } from "./users/users.module";
   providers: [],
   imports: [
     envConfig,
-    postgresConfig,
+    postgresConfig([
+      User,
+      Role,
+      UserRoles,
+      Token,
+    ]),
     UsersModule,
-  ]
+    RolesModule,
+    AuthModule],
 })
-
 export class AppModule {
 }

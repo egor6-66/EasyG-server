@@ -1,18 +1,18 @@
-import {NestFactory} from "@nestjs/core";
-
-import swaggerConfig from './configs/swagger'
-
-import { AppModule } from "./app.module";
+import { NestFactory } from '@nestjs/core';
+import mainConfig from './configs/main.config';
+import { AppModule } from './app.module';
 
 
 async function start() {
-    const app = await NestFactory.create(AppModule)
 
-    const PORT = process.env.PORT
-    console.log(process.env.PORT);
-    swaggerConfig(app)
+  const app = await NestFactory.create(AppModule);
 
-    await app.listen(PORT, ()=> console.log(`Server started on port: ${PORT} 🚀🚀🚀🚀🚀`))
+  mainConfig(app)
+
+  const PORT = process.env.PORT;
+  await app.listen(PORT, () =>
+    console.log(`Server started on port: ${PORT} 🚀🚀🚀🚀🚀`),
+  );
 }
 
 start();

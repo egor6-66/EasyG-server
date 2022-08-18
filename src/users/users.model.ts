@@ -1,7 +1,8 @@
-import { BelongsToMany, Column, DataType, Model, Table } from 'sequelize-typescript';
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 
 import { UserRoles } from '../intermediate-tables/user-roles.model';
 import { Role } from '../roles/roles.model';
+import { Token } from '../tokens/tokens.model';
 
 
 interface UserCreationAttrs {
@@ -21,11 +22,15 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
 
-  @Column({ type: DataType.STRING, defaultValue: null })
+  @Column({ type: DataType.STRING, defaultValue: '' })
   name: string;
 
-  @Column({ type: DataType.STRING,  defaultValue: null })
+  @Column({ type: DataType.STRING, defaultValue: '' })
   lastName: string;
+
+
+  @HasMany(() => Token)
+  tokens: Token[];
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];

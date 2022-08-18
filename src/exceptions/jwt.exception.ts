@@ -1,7 +1,7 @@
 import { User } from '../users/users.model';
+import { IToken } from '../interfaces/token.interface';
 
-
-export default (user: User) => ({
+export default (user: User): IToken => ({
   id: user.id,
   email: user.email,
   name: user.name,
